@@ -15,8 +15,73 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+	</dependency>
+	
+	<!-- spring -->
+	<dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+    </dependency>
+	<dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+    </dependency>
+    
+    <dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<scope>provided</scope>
+	</dependency>
+    
+    <!-- 日志相关组件,slf4j + logback -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+    </dependency>
+    
+    <dependency>
+		<groupId>com.jiangnan</groupId>
+		<artifactId>common-module-generator</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.jiangnan</groupId>
+		<artifactId>common-module-entity</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.jiangnan</groupId>
+		<artifactId>common-module-mybatis</artifactId>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.jiangnan</groupId>
+		<artifactId>common-module-fastjson</artifactId>
+	</dependency>
   </dependencies>
 </project>

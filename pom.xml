@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jiangnan</groupId>
@@ -8,46 +9,55 @@
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   	<junit.version>4.7</junit.version>
-      <commons-lang3.version>3.1</commons-lang3.version>
-      <commons-beanutils.version>1.8.3</commons-beanutils.version>
-      <commons-codec.version>1.8</commons-codec.version>
-      <mybatis.version>3.2.2</mybatis.version>
-      <mybatis.spring.version>1.2.0</mybatis.spring.version>
-      <mybatis.page.version>4.1.0</mybatis.page.version>
-      <jsqlparser.version>0.9.4</jsqlparser.version>
-      <spring.version>3.2.5.RELEASE</spring.version>
-      <fastjson.version>1.1.41</fastjson.version>
-      <druid.version>1.0.9</druid.version>
-      <jackson.version>2.4.0</jackson.version>
-      <mysql.version>5.1.27</mysql.version>
-      <shiro.version>1.2.2</shiro.version>
+    <commons-lang3.version>3.1</commons-lang3.version>
+    <commons-beanutils.version>1.8.3</commons-beanutils.version>
+    <commons-codec.version>1.8</commons-codec.version>
+    <mybatis.version>3.2.2</mybatis.version>
+    <mybatis.spring.version>1.2.0</mybatis.spring.version>
+    <mybatis.page.version>4.1.0</mybatis.page.version>
+    <jsqlparser.version>0.9.4</jsqlparser.version>
+    <spring.version>3.2.5.RELEASE</spring.version>
+    <druid.version>1.0.9</druid.version>
+    <jackson.version>2.4.0</jackson.version>
+    <mysql.version>5.1.27</mysql.version>
+    <shiro.version>1.2.2</shiro.version>
       
-      <servlet.version>2.5</servlet.version>
-      <jsp.version>2.2</jsp.version>
-      <jstl.version>1.2</jstl.version>
-      <standard.version>1.1.2</standard.version>
-      <javaee.version>6.0</javaee.version>
-      <sitemesh.version>2.4.2</sitemesh.version>
+    <servlet.version>2.5</servlet.version>
+    <jsp.version>2.2</jsp.version>
+    <jstl.version>1.2</jstl.version>
+    <standard.version>1.1.2</standard.version>
+    <javaee.version>6.0</javaee.version>
+    <sitemesh.version>3.0.0</sitemesh.version>
       
-      <slf4j.version>1.7.5</slf4j.version>
-      <logback.version>1.0.13</logback.version>
+    <slf4j.version>1.7.5</slf4j.version>
+    <logback.version>1.0.13</logback.version>
       
-      <dom4j.version>1.6.1</dom4j.version>
+    <dom4j.version>1.6.1</dom4j.version>
       
-      <jdk.version>1.6</jdk.version>
+    <jdk.version>1.6</jdk.version>
       
-      <quartz.version>2.1.7</quartz.version>
+    <quartz.version>2.1.7</quartz.version>
       
-      <ehcache.core.version>2.6.5</ehcache.core.version>
+    <ehcache.core.version>2.6.5</ehcache.core.version>
+    <aspectjweaver.version>1.7.4</aspectjweaver.version>
+      
+    <common-module-generator.version>0.0.1-SNAPSHOT</common-module-generator.version>
+    <common-module-entity.version>0.0.1-SNAPSHOT</common-module-entity.version>
+    <common-module-mybatis.version>0.0.1-SNAPSHOT</common-module-mybatis.version>
+    <common-module-fastjson.version>0.0.1-SNAPSHOT</common-module-fastjson.version>
+  
+  	<easyshop.version>0.0.1-SNAPSHOT</easyshop.version>
   </properties>
   
   <modules>
   	<module>easyShop-common</module>
+  	<module>easyShop-product</module>
+    <module>easyShop-manage</module>
   </modules>
   
   <dependencyManagement>
   	<dependencies>
-  		<!-- 单元测试 -->
+  		<!-- junit -->
   		<dependency>
 	    	<groupId>junit</groupId>
 	      	<artifactId>junit</artifactId>
@@ -55,7 +65,7 @@
 	      	<scope>test</scope>
 	    </dependency>
 	    
-	    <!-- utils 相关jar包 -->
+	    <!-- utils -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -90,7 +100,7 @@
 			<version>${mybatis.spring.version}</version>
 		</dependency>
 		
-		<!-- mybatis 分页插件 -->
+		<!-- mybatis page plugin -->
 		<dependency>
 		    <groupId>com.github.pagehelper</groupId>
 		    <artifactId>pagehelper</artifactId>
@@ -102,7 +112,7 @@
 			<version>${jsqlparser.version}</version>
 		</dependency>
 		
-		<!-- data source 相关jar包-->
+		<!-- data source -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -115,13 +125,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
-		
-		<!-- fastjson -->
-        <dependency>
-     		<groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		    <version>${fastjson.version}</version>
-		</dependency>
 		
 		<!-- jackson -->
 		<dependency>
@@ -140,7 +143,7 @@
 	        <version>${jackson.version}</version>
 	    </dependency>
 	    
-	    <!-- encache 相关jar包 -->
+	    <!-- ehcache -->
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
@@ -154,7 +157,7 @@
             </exclusions>
         </dependency>
 		
-		<!-- apache shiro 相关jar包 -->
+		<!-- apache shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
@@ -239,8 +242,14 @@
 			<artifactId>spring-expression</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${aspectjweaver.version}</version>
+		</dependency>
         
-        <!-- web相关jar包 -->
+        <!-- web -->
         <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -270,7 +279,13 @@
 		   	<version>${javaee.version}</version>
 		</dependency>
 		
-		<!-- 日志相关组件,slf4j + logback -->
+		<dependency>
+		    <groupId>org.sitemesh</groupId>
+		    <artifactId>sitemesh</artifactId>
+		    <version>${sitemesh.version}</version>
+		</dependency>
+		
+		<!-- log,slf4j + logback -->
 	    <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -292,6 +307,39 @@
 			<artifactId>dom4j</artifactId>
 			<version>${dom4j.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.jiangnan</groupId>
+			<artifactId>common-module-generator</artifactId>
+			<version>${common-module-generator.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jiangnan</groupId>
+			<artifactId>common-module-entity</artifactId>
+			<version>${common-module-entity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jiangnan</groupId>
+			<artifactId>common-module-mybatis</artifactId>
+			<version>${common-module-mybatis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jiangnan</groupId>
+			<artifactId>common-module-fastjson</artifactId>
+			<version>${common-module-fastjson.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.jiangnan</groupId>
+			<artifactId>easyShop-common</artifactId>
+			<version>${easyshop.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jiangnan</groupId>
+			<artifactId>easyShop-product</artifactId>
+			<version>${easyshop.version}</version>
+		</dependency>
   	</dependencies>
   </dependencyManagement>
   <build>
@@ -306,7 +354,7 @@
   		</plugins>
   	</pluginManagement>
     <plugins>
-  		<!-- 源码plugin -->
+  		<!-- source plugin -->
   		<plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
@@ -321,7 +369,7 @@
             	</execution>
             </executions>
         </plugin>
-        <!-- 修改编译版本 -->
+        <!-- compile version -->
         <plugin>
         	<groupId>org.apache.maven.plugins</groupId>
         	<artifactId>maven-compiler-plugin</artifactId>
@@ -335,12 +383,12 @@
   	</plugins>
   </build>
   
-  <!-- 开发人员信息 -->
+  <!-- developer -->
   <developers>
       <developer>
           <name>ywu</name>
           <email>yejunwu126@126.com</email>
-          <url></url>
+          <url/>
           <roles>
               <role>software engineer</role>
           </roles>
@@ -348,7 +396,7 @@
       </developer>
   </developers>
 
-  <!--许可证 -->
+  <!--license -->
   <licenses>
       <license>
           <name>Apache License, Version 2.0</name>
@@ -356,10 +404,10 @@
       </license>
   </licenses>
 
-  <!-- 持续集成信息 -->
+  <!-- continue integration -->
   <ciManagement>
       <system>continuum</system>
-      <url></url>
+      <url/>
       <notifiers>
           <notifier>
               <type>mail</type>
@@ -368,33 +416,33 @@
               <sendOnSuccess>true</sendOnSuccess>
               <sendOnWarning>false</sendOnWarning>
               <configuration>
-                  <address></address>
+                  <address/>
               </configuration>
           </notifier>
       </notifiers>
   </ciManagement>
 
-  <!-- 问题反馈信息 -->
+  <!-- problem issue -->
   <issueManagement>
       <system>Github</system>
-      <url></url>
+      <url/>
   </issueManagement>
 
-  <!-- 分发管理 -->
+  <!-- distribution -->
   <distributionManagement>
-      <!-- mvn site:deploy 部署的位置-->
+      <!-- mvn site:deploy position-->
       <site>
           <id>local</id>
           <name>filesystem</name>
-          <!-- 修改到磁盘的相应位置 -->
+          <!-- disk path -->
           <url>file:D:\target\site</url>
       </site>
   </distributionManagement>
 
-  <!-- 版本控制信息 -->
+  <!-- version control -->
   <scm>
-      <url></url>
-      <connection></connection>
-      <developerConnection></developerConnection>
+      <url/>
+      <connection/>
+      <developerConnection/>
   </scm>
 </project>
