@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyshop.product.mapper.ProductMapper">
+	<!-- 结果映射器 -->
+	<resultMap id="product" type="Product">
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+		<result property="partnumber" column="PARTNUMBER"/>
+		<result property="barcode" column="BARCODE"/>
+		<result property="brandId" column="BRAND_ID"/>
+		<result property="categoryId" column="CATEGORY_ID"/>
+		<result property="description" column="DESCRIPTION"/>
+		<result property="keywords" column="KEYWORDS"/>
+		<result property="url" column="URL"/>
+		<result property="picUrl" column="PIC_URL"/>
+		<result property="number" column="NUMBER"/>
+		<result property="buyable" column="BUYABLE"/>
+		<result property="freightPayType" column="FREIGHT_PAY_TYPE"/>
+		<result property="postageId" column="POSTAGE_ID"/>
+		<result property="status" column="STATUS"/>
+		<result property="auctionPoint" column="AUCTION_POINT"/>
+		<result property="subStock" column="SUB_STOCK"/>
+		<result property="listPrice" column="LIST_PRICE"/>
+		<result property="offerPrice" column="OFFER_PRICE"/>
+		<result property="field1" column="FIELD1"/>
+		<result property="field2" column="FIELD2"/>
+		<result property="field3" column="FIELD3"/>
+		<result property="createTime" column="CREATE_TIME"/>
+		<result property="lastUpdate" column="LAST_UPDATE"/>
+		<result property="version" column="VERSION"/>
+		<result property="deleted" column="DELETED"/>
+	</resultMap>
+
+	<!-- 保存 -->
+	<insert id="save" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="name != null">NAME,</if>
+			<if test="partnumber != null">PARTNUMBER,</if>
+			<if test="barcode != null">BARCODE,</if>
+			<if test="brandId != null">BRAND_ID,</if>
+			<if test="categoryId != null">CATEGORY_ID,</if>
+			<if test="description != null">DESCRIPTION,</if>
+			<if test="keywords != null">KEYWORDS,</if>
+			<if test="url != null">URL,</if>
+			<if test="picUrl != null">PIC_URL,</if>
+			<if test="number != null">NUMBER,</if>
+			<if test="buyable != null">BUYABLE,</if>
+			<if test="freightPayType != null">FREIGHT_PAY_TYPE,</if>
+			<if test="postageId != null">POSTAGE_ID,</if>
+			<if test="status != null">STATUS,</if>
+			<if test="auctionPoint != null">AUCTION_POINT,</if>
+			<if test="subStock != null">SUB_STOCK,</if>
+			<if test="listPrice != null">LIST_PRICE,</if>
+			<if test="offerPrice != null">OFFER_PRICE,</if>
+			<if test="field1 != null">FIELD1,</if>
+			<if test="field2 != null">FIELD2,</if>
+			<if test="field3 != null">FIELD3,</if>
+			<if test="createTime != null">CREATE_TIME,</if>
+			<if test="lastUpdate != null">LAST_UPDATE,</if>
+			<if test="version != null">VERSION,</if>
+			<if test="deleted != null">DELETED,</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
+			<if test="name != null">#{name},</if>
+			<if test="partnumber != null">#{partnumber},</if>
+			<if test="barcode != null">#{barcode},</if>
+			<if test="brandId != null">#{brandId},</if>
+			<if test="categoryId != null">#{categoryId},</if>
+			<if test="description != null">#{description},</if>
+			<if test="keywords != null">#{keywords},</if>
+			<if test="url != null">#{url},</if>
+			<if test="picUrl != null">#{picUrl},</if>
+			<if test="number != null">#{number},</if>
+			<if test="buyable != null">#{buyable},</if>
+			<if test="freightPayType != null">#{freightPayType},</if>
+			<if test="postageId != null">#{postageId},</if>
+			<if test="status != null">#{status},</if>
+			<if test="auctionPoint != null">#{auctionPoint},</if>
+			<if test="subStock != null">#{subStock},</if>
+			<if test="listPrice != null">#{listPrice},</if>
+			<if test="offerPrice != null">#{offerPrice},</if>
+			<if test="field1 != null">#{field1},</if>
+			<if test="field2 != null">#{field2},</if>
+			<if test="field3 != null">#{field3},</if>
+			<if test="createTime != null">#{createTime},</if>
+			<if test="lastUpdate != null">#{lastUpdate},</if>
+			<if test="version != null">#{version},</if>
+			<if test="deleted != null">#{deleted},</if>
+		</trim>
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="remove" parameterType="long">
+		DELETE FROM product WHERE ID = #{id}
+	</delete>
+
+	<!-- 更新 -->
+	<update id="update" parameterType="Product">
+		UPDATE product
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">ID = #{id},</if>
+				<if test="name != null">NAME = #{name},</if>
+				<if test="partnumber != null">PARTNUMBER = #{partnumber},</if>
+				<if test="barcode != null">BARCODE = #{barcode},</if>
+				<if test="brandId != null">BRAND_ID = #{brandId},</if>
+				<if test="categoryId != null">CATEGORY_ID = #{categoryId},</if>
+				<if test="description != null">DESCRIPTION = #{description},</if>
+				<if test="keywords != null">KEYWORDS = #{keywords},</if>
+				<if test="url != null">URL = #{url},</if>
+				<if test="picUrl != null">PIC_URL = #{picUrl},</if>
+				<if test="number != null">NUMBER = #{number},</if>
+				<if test="buyable != null">BUYABLE = #{buyable},</if>
+				<if test="freightPayType != null">FREIGHT_PAY_TYPE = #{freightPayType},</if>
+				<if test="postageId != null">POSTAGE_ID = #{postageId},</if>
+				<if test="status != null">STATUS = #{status},</if>
+				<if test="auctionPoint != null">AUCTION_POINT = #{auctionPoint},</if>
+				<if test="subStock != null">SUB_STOCK = #{subStock},</if>
+				<if test="listPrice != null">LIST_PRICE = #{listPrice},</if>
+				<if test="offerPrice != null">OFFER_PRICE = #{offerPrice},</if>
+				<if test="field1 != null">FIELD1 = #{field1},</if>
+				<if test="field2 != null">FIELD2 = #{field2},</if>
+				<if test="field3 != null">FIELD3 = #{field3},</if>
+				<if test="createTime != null">CREATE_TIME = #{createTime},</if>
+				<if test="lastUpdate != null">LAST_UPDATE = #{lastUpdate},</if>
+				<if test="version != null">VERSION = #{version},</if>
+				<if test="deleted != null">DELETED = #{deleted},</if>
+			</trim>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+	<!-- 乐观锁更新 -->
+	<update id="updateOptLock" parameterType="Product">
+		UPDATE product
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">ID = #{id},</if>
+				<if test="name != null">NAME = #{name},</if>
+				<if test="partnumber != null">PARTNUMBER = #{partnumber},</if>
+				<if test="barcode != null">BARCODE = #{barcode},</if>
+				<if test="brandId != null">BRAND_ID = #{brandId},</if>
+				<if test="categoryId != null">CATEGORY_ID = #{categoryId},</if>
+				<if test="description != null">DESCRIPTION = #{description},</if>
+				<if test="keywords != null">KEYWORDS = #{keywords},</if>
+				<if test="url != null">URL = #{url},</if>
+				<if test="picUrl != null">PIC_URL = #{picUrl},</if>
+				<if test="number != null">NUMBER = #{number},</if>
+				<if test="buyable != null">BUYABLE = #{buyable},</if>
+				<if test="freightPayType != null">FREIGHT_PAY_TYPE = #{freightPayType},</if>
+				<if test="postageId != null">POSTAGE_ID = #{postageId},</if>
+				<if test="status != null">STATUS = #{status},</if>
+				<if test="auctionPoint != null">AUCTION_POINT = #{auctionPoint},</if>
+				<if test="subStock != null">SUB_STOCK = #{subStock},</if>
+				<if test="listPrice != null">LIST_PRICE = #{listPrice},</if>
+				<if test="offerPrice != null">OFFER_PRICE = #{offerPrice},</if>
+				<if test="field1 != null">FIELD1 = #{field1},</if>
+				<if test="field2 != null">FIELD2 = #{field2},</if>
+				<if test="field3 != null">FIELD3 = #{field3},</if>
+				<if test="createTime != null">CREATE_TIME = #{createTime},</if>
+				<if test="lastUpdate != null">LAST_UPDATE = #{lastUpdate},</if>
+				<if test="version != null">VERSION = VERSION + 1,</if>
+				<if test="deleted != null">DELETED = #{deleted},</if>
+			</trim>
+		</set>
+		WHERE ID = #{id} AND VERSION = #{version}
+	</update>
+
+	<!-- 查询字段 -->
+	<sql id="ProductSelector">
+		SELECT
+			<if test="fields != null and fields.size() > 0">
+				<foreach collection="fields" separator="," item="field">
+					${field}
+				</foreach>
+			</if>
+			<if test="fields == null or fields.size() == 0">
+				ID, NAME, PARTNUMBER, BARCODE, BRAND_ID, CATEGORY_ID, DESCRIPTION, KEYWORDS, URL, PIC_URL, NUMBER, BUYABLE, FREIGHT_PAY_TYPE, POSTAGE_ID, STATUS, AUCTION_POINT, SUB_STOCK, LIST_PRICE, OFFER_PRICE, FIELD1, FIELD2, FIELD3, CREATE_TIME, LAST_UPDATE, VERSION, DELETED 
+			</if>
+		FROM product
+	</sql>
+
+	<!-- where条件 -->
+	<sql id="ProductWhere">
+		<where>
+			<if test="params.id != null">AND ID = #{params.id}</if>
+			<if test="params.name != null and params.name != ''">AND NAME = #{params.name}</if>
+			<if test="params.partnumber != null and params.partnumber != ''">AND PARTNUMBER = #{params.partnumber}</if>
+			<if test="params.barcode != null and params.barcode != ''">AND BARCODE = #{params.barcode}</if>
+			<if test="params.brandId != null">AND BRAND_ID = #{params.brandId}</if>
+			<if test="params.categoryId != null">AND CATEGORY_ID = #{params.categoryId}</if>
+			<if test="params.description != null">AND DESCRIPTION = #{params.description}</if>
+			<if test="params.keywords != null">AND KEYWORDS = #{params.keywords}</if>
+			<if test="params.url != null and params.url != ''">AND URL = #{params.url}</if>
+			<if test="params.picUrl != null and params.picUrl != ''">AND PIC_URL = #{params.picUrl}</if>
+			<if test="params.number != null">AND NUMBER = #{params.number}</if>
+			<if test="params.buyable != null">AND BUYABLE = #{params.buyable}</if>
+			<if test="params.freightPayType != null">AND FREIGHT_PAY_TYPE = #{params.freightPayType}</if>
+			<if test="params.postageId != null">AND POSTAGE_ID = #{params.postageId}</if>
+			<if test="params.status != null">AND STATUS = #{params.status}</if>
+			<if test="params.auctionPoint != null">AND AUCTION_POINT = #{params.auctionPoint}</if>
+			<if test="params.subStock != null">AND SUB_STOCK = #{params.subStock}</if>
+			<if test="params.listPrice != null">AND LIST_PRICE = #{params.listPrice}</if>
+			<if test="params.offerPrice != null">AND OFFER_PRICE = #{params.offerPrice}</if>
+			<if test="params.field1 != null and params.field1 != ''">AND FIELD1 = #{params.field1}</if>
+			<if test="params.field2 != null and params.field2 != ''">AND FIELD2 = #{params.field2}</if>
+			<if test="params.field3 != null">AND FIELD3 = #{params.field3}</if>
+			<if test="params.createTime != null">AND CREATE_TIME = #{params.createTime}</if>
+			<if test="params.lastUpdate != null">AND LAST_UPDATE = #{params.lastUpdate}</if>
+			<if test="params.version != null">AND VERSION = #{params.version}</if>
+			<if test="params.deleted != null">AND DELETED = #{params.deleted}</if>
+		</where>
+	</sql>
+
+	<!-- 排序字段 -->
+	<sql id="ProductOrderBy">
+		<if test="orderBy != null and orderBy.size >0">
+			ORDER BY 
+			<foreach collection="orderBy" index="key" item="val" separator=",">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+
+	<!-- 主键查询 -->
+	<select id="get" parameterType="long" resultMap="product">
+		SELECT ID, NAME, PARTNUMBER, BARCODE, BRAND_ID, CATEGORY_ID, DESCRIPTION, KEYWORDS, URL, PIC_URL, NUMBER, BUYABLE, FREIGHT_PAY_TYPE, POSTAGE_ID, STATUS, AUCTION_POINT, SUB_STOCK, LIST_PRICE, OFFER_PRICE, FIELD1, FIELD2, FIELD3, CREATE_TIME, LAST_UPDATE, VERSION, DELETED FROM product WHERE ID = #{id}
+	</select>
+
+	<!-- 列表查询 -->
+	<select id="list" resultMap="product">
+		<include refid="ProductSelector"/>
+		<include refid="ProductWhere"/>
+		<include refid="ProductOrderBy"/>
+	</select>
+</mapper>

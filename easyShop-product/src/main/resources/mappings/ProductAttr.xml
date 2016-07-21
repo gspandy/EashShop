@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyshop.product.mapper.ProductAttrMapper">
+	<!-- 结果映射器 -->
+	<resultMap id="productAttr" type="ProductAttr">
+		<result property="id" column="ID"/>
+		<result property="productId" column="PRODUCT_ID"/>
+		<result property="attrId" column="ATTR_ID"/>
+		<result property="attrName" column="ATTR_NAME"/>
+		<result property="value" column="VALUE"/>
+		<result property="isSale" column="IS_SALE"/>
+		<result property="createTime" column="CREATE_TIME"/>
+		<result property="lastUpdate" column="LAST_UPDATE"/>
+		<result property="version" column="VERSION"/>
+		<result property="deleted" column="DELETED"/>
+	</resultMap>
+
+	<!-- 保存 -->
+	<insert id="save" parameterType="ProductAttr" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO product_attr
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="productId != null">PRODUCT_ID,</if>
+			<if test="attrId != null">ATTR_ID,</if>
+			<if test="attrName != null">ATTR_NAME,</if>
+			<if test="value != null">VALUE,</if>
+			<if test="isSale != null">IS_SALE,</if>
+			<if test="createTime != null">CREATE_TIME,</if>
+			<if test="lastUpdate != null">LAST_UPDATE,</if>
+			<if test="version != null">VERSION,</if>
+			<if test="deleted != null">DELETED,</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
+			<if test="productId != null">#{productId},</if>
+			<if test="attrId != null">#{attrId},</if>
+			<if test="attrName != null">#{attrName},</if>
+			<if test="value != null">#{value},</if>
+			<if test="isSale != null">#{isSale},</if>
+			<if test="createTime != null">#{createTime},</if>
+			<if test="lastUpdate != null">#{lastUpdate},</if>
+			<if test="version != null">#{version},</if>
+			<if test="deleted != null">#{deleted},</if>
+		</trim>
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="remove" parameterType="long">
+		DELETE FROM product_attr WHERE ID = #{id}
+	</delete>
+
+	<!-- 更新 -->
+	<update id="update" parameterType="ProductAttr">
+		UPDATE product_attr
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">ID = #{id},</if>
+				<if test="productId != null">PRODUCT_ID = #{productId},</if>
+				<if test="attrId != null">ATTR_ID = #{attrId},</if>
+				<if test="attrName != null">ATTR_NAME = #{attrName},</if>
+				<if test="value != null">VALUE = #{value},</if>
+				<if test="isSale != null">IS_SALE = #{isSale},</if>
+				<if test="createTime != null">CREATE_TIME = #{createTime},</if>
+				<if test="lastUpdate != null">LAST_UPDATE = #{lastUpdate},</if>
+				<if test="version != null">VERSION = #{version},</if>
+				<if test="deleted != null">DELETED = #{deleted},</if>
+			</trim>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+	<!-- 乐观锁更新 -->
+	<update id="updateOptLock" parameterType="ProductAttr">
+		UPDATE product_attr
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">ID = #{id},</if>
+				<if test="productId != null">PRODUCT_ID = #{productId},</if>
+				<if test="attrId != null">ATTR_ID = #{attrId},</if>
+				<if test="attrName != null">ATTR_NAME = #{attrName},</if>
+				<if test="value != null">VALUE = #{value},</if>
+				<if test="isSale != null">IS_SALE = #{isSale},</if>
+				<if test="createTime != null">CREATE_TIME = #{createTime},</if>
+				<if test="lastUpdate != null">LAST_UPDATE = #{lastUpdate},</if>
+				<if test="version != null">VERSION = VERSION + 1,</if>
+				<if test="deleted != null">DELETED = #{deleted},</if>
+			</trim>
+		</set>
+		WHERE ID = #{id} AND VERSION = #{version}
+	</update>
+
+	<!-- 查询字段 -->
+	<sql id="ProductAttrSelector">
+		SELECT
+			<if test="fields != null and fields.size() > 0">
+				<foreach collection="fields" separator="," item="field">
+					${field}
+				</foreach>
+			</if>
+			<if test="fields == null or fields.size() == 0">
+				ID, PRODUCT_ID, ATTR_ID, ATTR_NAME, VALUE, IS_SALE, CREATE_TIME, LAST_UPDATE, VERSION, DELETED 
+			</if>
+		FROM product_attr
+	</sql>
+
+	<!-- where条件 -->
+	<sql id="ProductAttrWhere">
+		<where>
+			<if test="params.id != null">AND ID = #{params.id}</if>
+			<if test="params.productId != null">AND PRODUCT_ID = #{params.productId}</if>
+			<if test="params.attrId != null">AND ATTR_ID = #{params.attrId}</if>
+			<if test="params.attrName != null and params.attrName != ''">AND ATTR_NAME = #{params.attrName}</if>
+			<if test="params.value != null and params.value != ''">AND VALUE = #{params.value}</if>
+			<if test="params.isSale != null">AND IS_SALE = #{params.isSale}</if>
+			<if test="params.createTime != null">AND CREATE_TIME = #{params.createTime}</if>
+			<if test="params.lastUpdate != null">AND LAST_UPDATE = #{params.lastUpdate}</if>
+			<if test="params.version != null">AND VERSION = #{params.version}</if>
+			<if test="params.deleted != null">AND DELETED = #{params.deleted}</if>
+		</where>
+	</sql>
+
+	<!-- 排序字段 -->
+	<sql id="ProductAttrOrderBy">
+		<if test="orderBy != null and orderBy.size >0">
+			ORDER BY 
+			<foreach collection="orderBy" index="key" item="val" separator=",">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+
+	<!-- 主键查询 -->
+	<select id="get" parameterType="long" resultMap="productAttr">
+		SELECT ID, PRODUCT_ID, ATTR_ID, ATTR_NAME, VALUE, IS_SALE, CREATE_TIME, LAST_UPDATE, VERSION, DELETED FROM product_attr WHERE ID = #{id}
+	</select>
+
+	<!-- 列表查询 -->
+	<select id="list" resultMap="productAttr">
+		<include refid="ProductAttrSelector"/>
+		<include refid="ProductAttrWhere"/>
+		<include refid="ProductAttrOrderBy"/>
+	</select>
+</mapper>
