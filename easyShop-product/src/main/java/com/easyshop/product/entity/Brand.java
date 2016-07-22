@@ -37,7 +37,7 @@ public class Brand extends BaseEntity {
 	/**
 	 * 更新时间
 	 */
-	private Date lastUpdate;
+	private Date lastUpdate = new Date();
 
 	public Integer getId() {
 		return this.id;

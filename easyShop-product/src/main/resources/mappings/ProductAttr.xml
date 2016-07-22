@@ -115,7 +115,6 @@
 			<if test="params.isSale != null">AND IS_SALE = #{params.isSale}</if>
 			<if test="params.createTime != null">AND CREATE_TIME = #{params.createTime}</if>
 			<if test="params.lastUpdate != null">AND LAST_UPDATE = #{params.lastUpdate}</if>
-			<if test="params.version != null">AND VERSION = #{params.version}</if>
 			<if test="params.deleted != null">AND DELETED = #{params.deleted}</if>
 		</where>
 	</sql>

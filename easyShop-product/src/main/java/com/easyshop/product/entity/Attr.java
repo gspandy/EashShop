@@ -41,7 +41,7 @@ public class Attr extends BaseEntity {
 	/**
 	 * 创建时间
 	 */
-	private Date createTime = new Date();
+	private Date createTime;
 	/**
 	 * 更新时间
 	 */

@@ -101,9 +101,6 @@
 			<if test="params.name != null and params.name != ''">AND NAME = #{params.name}</if>
 			<if test="params.code != null and params.code != ''">AND CODE = #{params.code}</if>
 			<if test="params.url != null and params.url != ''">AND URL = #{params.url}</if>
-			<if test="params.createTime != null">AND CREATE_TIME = #{params.createTime}</if>
-			<if test="params.lastUpdate != null">AND LAST_UPDATE = #{params.lastUpdate}</if>
-			<if test="params.version != null">AND VERSION = #{params.version}</if>
 			<if test="params.deleted != null">AND DELETED = #{params.deleted}</if>
 		</where>
 	</sql>
