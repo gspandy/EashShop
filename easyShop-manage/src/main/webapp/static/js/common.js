@@ -18,6 +18,7 @@ function responseTips(data) {
 			"showMethod": "fadeIn",
 			"hideMethod": "fadeOut"
 		};
+		console.log(data.status)
 		if (data.status == 0) {
 			toastr.success(data.msg, "操作提示!");
 		} else {

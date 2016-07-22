@@ -14,7 +14,7 @@
     <script src="${ctx }/static/lib/hplus/js/plugins/jqgrid/jquery.jqGrid.min.js"></script>
     <script src="${ctx }/static/lib/hplus/js/content.min.js?v=1.0.0"></script>
     <script src="${ctx }/static/lib/hplus/js/plugins/serialize/jquery.serialize-object.min.js"></script>
-    <script src="${ctx }/static/lib/hplus/js/plugins/bedialog/jquery.bedialog.js"></script>
+    <%-- <script src="${ctx }/static/lib/hplus/js/plugins/bedialog/jquery.bedialog.js"></script> --%>
     <script src="${ctx }/static/lib/hplus/js/plugins/form/jquery.form.js"></script>
     <script src="${ctx }/static/lib/hplus/js/plugins/toastr/toastr.min.js"></script>
     <script src="${ctx }/static/lib/hplus/js/plugins/my97DatePicker/WdatePicker.js"></script>

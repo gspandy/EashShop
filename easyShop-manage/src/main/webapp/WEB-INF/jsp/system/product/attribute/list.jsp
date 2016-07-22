@@ -57,12 +57,13 @@
         </div>
     </div>
     
-    <div class="modal inmodal" id="editDialog" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <jsp:include page="edit.jsp"/>
     
     <script>
+    	var attrListGrid = null;
         $(document).ready(function() {
         	$.jgrid.defaults.styleUI = "Bootstrap";
-        	$("#attrList").jqGrid({
+        	attrListGrid = $("#attrList").jqGrid({
         		url: ctx + '/system/attribute/list',
         		datatype: "json",
         		height: 350,
@@ -88,8 +89,8 @@
         		edittext: "Edit",
         		hidegrid: false
         	});
-        	$("#attrList").setSelection(4, true);
-        	$("#attrList").jqGrid("navGrid", "#attrListPager", {
+        	attrListGrid.setSelection(4, true);
+        	attrListGrid.jqGrid("navGrid", "#attrListPager", {
         		edit: true,
         		add: true,
         		del: true,
@@ -99,32 +100,51 @@
         		reloadAfterSubmit: true});
 	        $(window).bind("resize", function() {
 	        	var width = $(".jqGrid_wrapper").width();
-	        	$("#attrList").setGridWidth(width)
+	        	attrListGrid.setGridWidth(width)
 	        });
 	        
 	      	//查询
 	        $("#queryAttr").click(function() { 
 	        	var params = $("#attrSearchForm").serializeObject();
-	        	var pd = $("#attrList").jqGrid('getGridParam', 'postData');
+	        	var pd = attrListGrid.jqGrid('getGridParam', 'postData');
 	        	pd = $.extend(pd, params);
-	        	$("#attrList").jqGrid('setGridParam', 'postData', pd);
-	        	$("#attrList").trigger("reloadGrid");
+	        	attrListGrid.jqGrid('setGridParam', 'postData', pd);
+	        	attrListGrid.trigger("reloadGrid");
 	        });
 	      	
 	      	//新增
 			$("#addAttr").click(function() {
-				$("#editDialog").bedialog({
+				/* $("#editDialog").bedialog({
 				    url: "${ctx}/system/attribute/add"
-				});
+				}); */
+				$('#attrForm').attr("action", "${ctx }/system/attribute/add");
+				$('#attrDialog').modal();
 			});
 	      	
 			//修改
 			$("#updAttr").click(function() {
-				var id = $("#attrList").jqGrid('getGridParam', 'selrow');
+				var id = attrListGrid.jqGrid('getGridParam', 'selrow');
 				if (id) {
-					$("#editDialog").bedialog({
+					/* $("#attrDialog").bedialog({
 					    url: "${ctx}/system/attribute/update/" + id
-					});
+					}); */
+					$('#attrForm').attr("action", "${ctx }/system/attribute/update");
+					$.ajax({
+		                type: "get",
+		                url: "${ctx}/system/attribute/get/" + id,
+		                async: false, //设为false就是同步请求
+		                //cache: false,
+		                success: function (data) {
+		                	//设置数据
+		                	$("#attrDialog [name='id']").val(data.id);
+		                	$("#attrDialog [name='name']").val(data.name);
+		                	$("#attrDialog [name='code']").val(data.code);
+		                	$("#attrDialog [name='field1']").val(data.field1);
+		                	$("#attrDialog [name='field2']").val(data.field2);
+		                	$("#attrDialog [name='field3']").val(data.field3);
+		                	$("#attrDialog").modal();
+		                }
+		            });
 				} else {
 					var data = {
 						status: 1,
@@ -136,16 +156,16 @@
 	      	
 			//删除
 			$("#delAttr").click(function() {
-				var id = $("#attrList").jqGrid('getGridParam', 'selrow');
+				var id = attrListGrid.jqGrid('getGridParam', 'selrow');
 				if (id) {
 					$.ajax({
 	    				type:'get',
 	    				dataType: 'json',
-	    				url:"${ctx}/system/auth/user/delete/" + id,
+	    				url:"${ctx}/system/attribute/delete/" + id,
 	    				success: function(data) {
 	    					//var obj = $.parseJSON(data);
 	    					responseTips(data);
-	    					$("#attrList").trigger("reloadGrid");
+	    					attrListGrid.trigger("reloadGrid");
 	    				}
 	    			});
 				} else {
@@ -156,15 +176,26 @@
 					responseTips(data);
 				}
 			});
+			
+			$("#editBtn").click(function() {
+				$("#attrForm").submit();
+			});
+			//提交表单
+			$('#attrForm').form({
+				dataType: "json",
+			    onSubmit: function() {    
+			    	/* var isValid = $(this).form('validate');
+					return isValid;	// 返回false终止表单提交 */
+					return true;
+			    },    
+			    success: function(data) {
+			    	var obj = $.parseJSON(data);
+			    	responseTips(obj);
+			    	$('#attrDialog').modal('hide');
+			    	attrListGrid.trigger("reloadGrid");
+			    }    
+			});
         });
-        
-        function processResult(data) {
-        	var obj = $.parseJSON(data);
-	    	responseTips(obj);
-	    	console.log($('#editDialog'));
-	    	$('#editDialog').modal('hide');
-	    	$("#attrList").trigger("reloadGrid");
-        }
     </script>
 </body>
 </html>

@@ -91,17 +91,15 @@ public class AttributeController extends BaseController {
 	}
 	
 	/**
-	 * 修改页面
+	 * 获取属性信息
 	 * @param id
 	 * @param model
-	 * @return
+	 * @return json格式数据
 	 */
-	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-	public String toUpdate(@PathVariable(value = "id") Long id, Model model) {
-		super.updateAction(model);
+	@RequestMapping(value = "get/{id}", method = RequestMethod.GET)
+	public void get(@PathVariable(value = "id") Long id, Model model, HttpServletResponse response) {
 		Attr attr = attrService.get(id);
-		model.addAttribute("attr", attr);
-		return "product/attribute/edit";
+		super.jsonResponse(response, attr);
 	}
 	
 	/**
@@ -116,6 +114,22 @@ public class AttributeController extends BaseController {
 		} catch (Exception e) {
 			LOGGER.error("属性'" + attr.getName() + "'修改失败", e);
 			super.ajaxResponse(response, 1, "属性修改失败");
+		}
+		super.ajaxResponse(response, 0);
+	}
+	
+	/**
+	 * 删除属性
+	 * @param id
+	 * @param response
+	 */
+	@RequestMapping(value = "delete/{id}")
+	public void delete(@PathVariable(value = "id") Long id, HttpServletResponse response) {
+		try {
+			attrService.delete(id);
+		} catch (Exception e) {
+			LOGGER.error("属性删除失败", e);
+			super.ajaxResponse(response, 1, "属性删除失败");
 		}
 		super.ajaxResponse(response, 0);
 	}
