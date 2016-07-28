@@ -14,12 +14,12 @@ $(document).ready(function() {
 		rowNum: 10,
 		rowList: [10,20,30],
 		mtype: 'POST',
-		colNames: ["序号", "品牌名称", "品牌标识", "链接", "创建时间", "更新时间"],
+		colNames: ["序号", "品牌名称", "品牌标识", "站点链接", "创建时间", "更新时间"],
 		colModel: [
 			{name: "id", index: "id", hidden: true, editable: false, width: 30, sorttype: "int", search: false},
 			{name: "name", index: "name", editable: false, width: 60},
 			{name: "code", index:" code", editable: false, width: 80},
-			{name: "url", index:" url", editable: false, width: 180},
+			{name: "siteUrl", index:" siteUrl", editable: false, width: 180},
 			{name: "createTime", index: "createTime", editable: false, width: 90, sorttype: "date"},
 			{name: "lastUpdate", index: "lastUpdate", editable: false, width: 90, sorttype: "date"}
 		],
@@ -59,7 +59,8 @@ $(document).ready(function() {
 		$("#brandDialog [name='id']").val("");
     	$("#brandDialog [name='name']").val("");
     	$("#brandDialog [name='code']").val("");
-    	$("#brandDialog [name='url']").val("");
+    	$("#brandDialog [name='siteUrl']").val("");
+    	$("#brandDialog [name='logo']").val("");
 		$('#brandDialog').modal();
 	});
   	
@@ -78,7 +79,8 @@ $(document).ready(function() {
                 	$("#brandDialog [name='id']").val(data.id);
                 	$("#brandDialog [name='name']").val(data.name);
                 	$("#brandDialog [name='code']").val(data.code);
-                	$("#brandDialog [name='url']").val(data.url);
+                	$("#brandDialog [name='siteUrl']").val(data.siteUrl);
+                	$("#brandDialog [name='logo']").val(data.logo);
                 	$("#brandDialog").modal();
                 }
             });

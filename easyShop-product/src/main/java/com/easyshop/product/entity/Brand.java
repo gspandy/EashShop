@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * <p>品牌
  * @author auto generated
- * @since 2016-06-12 17:59:08
+ * @since 2016-07-26 09:34:17
  */
 public class Brand extends BaseEntity {
 	private static final long serialVersionUID = 1L;
@@ -27,9 +27,9 @@ public class Brand extends BaseEntity {
 	 */
 	private String code;
 	/**
-	 * URL
+	 * 站点URL
 	 */
-	private String url;
+	private String siteUrl;
 	/**
 	 * 创建时间
 	 */
@@ -37,7 +37,11 @@ public class Brand extends BaseEntity {
 	/**
 	 * 更新时间
 	 */
-	private Date lastUpdate = new Date();
+	private Date lastUpdate;
+	/**
+	 * 品牌图标
+	 */
+	private String logo;
 
 	public Integer getId() {
 		return this.id;
@@ -63,12 +67,12 @@ public class Brand extends BaseEntity {
 		this.code = code;
 	}
 
-	public String getUrl() {
-		return this.url;
+	public String getSiteUrl() {
+		return this.siteUrl;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setSiteUrl(String siteUrl) {
+		this.siteUrl = siteUrl;
 	}
 
 	public Date getCreateTime() {
@@ -85,6 +89,14 @@ public class Brand extends BaseEntity {
 
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+
+	public String getLogo() {
+		return this.logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 
 }

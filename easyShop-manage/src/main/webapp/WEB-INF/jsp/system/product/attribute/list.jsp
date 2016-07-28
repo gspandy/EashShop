@@ -49,22 +49,22 @@
             <div class="col-sm-6">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <form action="" method="post" id="attrSearchForm">
+                        <form action="" method="post" id="attrValSearchForm">
 	                    	<div class="row">
 	                            <div class="col-sm-6 m-b-xs">
 	                                <div class="input-group m-b">
 	                                	<span class="input-group-btn"><button type="button" class="btn btn-default">属性值</button></span>
-	                                    <input name="value" type="text" class="form-control" placeholder="属性名称">
+	                                    <input name="value" type="text" class="form-control" placeholder="属性值名称">
 	                                </div>
 	                            </div>
 	                        </div>
                         </form>
                         <div class="row">
                             <div class="col-sm-12 m-b-xs">
-                                <button id="queryAttr" class="btn btn-success" type="button"><i class="fa fa-eye"></i>&nbsp;查询</button>
-                                <button id="addAttr" class="btn btn-primary"><i class="fa fa-check"></i>&nbsp;添加</button>
-                                <button id="updAttr" class="btn btn-info" type="button"><i class="fa fa-paste"></i>&nbsp;修改</button>
-                                <button id="delAttr" class="btn btn-warning" type="button"><i class="fa fa-warning"></i>&nbsp;删除</button>
+                                <button id="queryAttrVal" class="btn btn-success" type="button"><i class="fa fa-eye"></i>&nbsp;查询</button>
+                                <button id="addAttrVal" class="btn btn-primary"><i class="fa fa-check"></i>&nbsp;添加</button>
+                                <button id="updAttrVal" class="btn btn-info" type="button"><i class="fa fa-paste"></i>&nbsp;修改</button>
+                                <button id="delAttrVal" class="btn btn-warning" type="button"><i class="fa fa-warning"></i>&nbsp;删除</button>
                             </div>
                         </div>
                     </div>
@@ -80,6 +80,7 @@
     </div>
     
     <jsp:include page="edit.jsp"/>
+    <jsp:include page="editVal.jsp"/>
     
 	<script src="${ctx }/static/js/product/attr/attr.js"></script>
 </body>

@@ -42,7 +42,7 @@ $(document).ready(function() {
 	
 	//attr val grid
 	attrValListGrid = $("#attrValList").jqGrid({
-		url: ctx + '/system/attribute/list',
+		url: ctx + '/system/attrval/list',
 		datatype: "json",
 		height: 350,
 		autowidth: true,
@@ -50,11 +50,10 @@ $(document).ready(function() {
 		rowNum: 10,
 		rowList: [10,20,30],
 		mtype: 'POST',
-		colNames: ["序号", "属性名称", "属性标识", "创建时间", "更新时间"],
+		colNames: ["序号", "属性值", "创建时间", "更新时间"],
 		colModel: [
 			{name: "id", index: "id", hidden: true, editable: false, width: 30, sorttype: "int", search: false},
-			{name: "name", index: "name", editable: false, width: 80},
-			{name: "code", index:" code", editable: false, width: 100},
+			{name: "value", index: "value", editable: false, width: 80},
 			{name: "createTime", index: "createTime", editable: false, width: 110, sorttype: "date"},
 			{name: "lastUpdate", index: "lastUpdate", editable: false, width: 110, sorttype: "date"}
 		],
@@ -176,6 +175,126 @@ $(document).ready(function() {
 	    	responseTips(obj);
 	    	$('#attrDialog').modal('hide');
 	    	attrListGrid.trigger("reloadGrid");
+	    }    
+	});
+	
+	/**
+	 * 属性值
+	 */
+	//查询
+    $("#queryAttrVal").click(function() {
+    	var attrId = attrListGrid.jqGrid('getGridParam', 'selrow');
+		if (attrId) {
+			var params = $("#attrValSearchForm").serializeObject();
+	    	var pd = attrValListGrid.jqGrid('getGridParam', 'postData');
+	    	pd = $.extend(pd, params);
+	    	pd = $.extend(pd, {"attrId" : attrId});
+	    	attrValListGrid.jqGrid('setGridParam', 'postData', pd);
+	    	attrValListGrid.trigger("reloadGrid");
+		} else {
+			var data = {
+				status: 1,
+				msg: "请先选择属性"
+			};
+			responseTips(data);
+		}
+    });
+  	
+  	//新增
+	$("#addAttrVal").click(function() {
+		/* $("#editDialog").bedialog({
+		    url: "${ctx}/system/attribute/add"
+		}); */
+		var attrId = attrListGrid.jqGrid('getGridParam', 'selrow');
+		if (attrId) {
+			$('#attrValForm').attr("action", ctx + "/system/attrval/add");
+			$("#attrValDialog [name='id']").val("");
+			$("#attrValDialog [name='attrId']").val(attrId);
+	    	$("#attrValDialog [name='value']").val("");
+	    	$("#attrValDialog [name='field1']").val("");
+	    	$("#attrValDialog [name='field2']").val("");
+	    	$("#attrValDialog [name='field3']").val("");
+			$('#attrValDialog').modal();
+		} else {
+			var data = {
+				status: 1,
+				msg: "请先选择属性"
+			};
+			responseTips(data);
+		}
+	});
+  	
+	//修改
+	$("#updAttrVal").click(function() {
+		var id = attrValListGrid.jqGrid('getGridParam', 'selrow');
+		if (id) {
+			/* $("#attrDialog").bedialog({
+			    url: "${ctx}/system/attribute/update/" + id
+			}); */
+			$('#attrValForm').attr("action", ctx + "/system/attrval/update");
+			$.ajax({
+                type: "get",
+                url: ctx + "/system/attrval/get/" + id,
+                async: false, //设为false就是同步请求
+                //cache: false,
+                success: function (data) {
+                	//设置数据
+                	$("#attrValDialog [name='id']").val(data.id);
+                	$("#attrValDialog [name='value']").val(data.value);
+                	$("#attrValDialog [name='field1']").val(data.field1);
+                	$("#attrValDialog [name='field2']").val(data.field2);
+                	$("#attrValDialog [name='field3']").val(data.field3);
+                	$("#attrValDialog").modal();
+                }
+            });
+		} else {
+			var data = {
+				status: 1,
+				msg: "请先选择一行"
+			};
+			responseTips(data);
+		}
+	});
+  	
+	//删除
+	$("#delAttrVal").click(function() {
+		var id = attrValListGrid.jqGrid('getGridParam', 'selrow');
+		if (id) {
+			$.ajax({
+				type: 'get',
+				dataType: 'json',
+				url: ctx + "/system/attrval/delete/" + id,
+				success: function(data) {
+					//var obj = $.parseJSON(data);
+					responseTips(data);
+					attrValListGrid.trigger("reloadGrid");
+				}
+			});
+		} else {
+			var data = {
+				status: 1,
+				msg: "请先选择一行"
+			};
+			responseTips(data);
+		}
+	});
+	
+	$("#editValBtn").click(function() {
+		$("#attrValForm").submit();
+	});
+	//提交表单
+	$('#attrValForm').form({
+		dataType: "json",
+	    onSubmit: function() {    
+	    	/* var isValid = $(this).form('validate');
+			return isValid;	// 返回false终止表单提交 */
+			return true;
+	    },    
+	    success: function(data) {
+	    	var obj = $.parseJSON(data);
+	    	responseTips(obj);
+	    	$('#attrValDialog').modal('hide');
+	    	attrValListGrid.trigger("reloadGrid");
 	    }    
 	});
 });

@@ -33,7 +33,7 @@ public class Category extends BaseEntity {
 	/**
 	 * 是否是父分类,1:是,0:否
 	 */
-	private Integer isParent;
+	private Integer isParent = 0;
 	/**
 	 * 创建时间
 	 */

@@ -6,11 +6,12 @@
 		<result property="id" column="ID"/>
 		<result property="name" column="NAME"/>
 		<result property="code" column="CODE"/>
-		<result property="url" column="URL"/>
+		<result property="siteUrl" column="SITE_URL"/>
 		<result property="createTime" column="CREATE_TIME"/>
 		<result property="lastUpdate" column="LAST_UPDATE"/>
 		<result property="version" column="VERSION"/>
 		<result property="deleted" column="DELETED"/>
+		<result property="logo" column="LOGO"/>
 	</resultMap>
 
 	<!-- 保存 -->
@@ -20,22 +21,24 @@
 			<if test="id != null">ID,</if>
 			<if test="name != null">NAME,</if>
 			<if test="code != null">CODE,</if>
-			<if test="url != null">URL,</if>
+			<if test="siteUrl != null">SITE_URL,</if>
 			<if test="createTime != null">CREATE_TIME,</if>
 			<if test="lastUpdate != null">LAST_UPDATE,</if>
 			<if test="version != null">VERSION,</if>
 			<if test="deleted != null">DELETED,</if>
+			<if test="logo != null">LOGO,</if>
 		</trim>
 		VALUES
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">#{id},</if>
 			<if test="name != null">#{name},</if>
 			<if test="code != null">#{code},</if>
-			<if test="url != null">#{url},</if>
+			<if test="siteUrl != null">#{siteUrl},</if>
 			<if test="createTime != null">#{createTime},</if>
 			<if test="lastUpdate != null">#{lastUpdate},</if>
 			<if test="version != null">#{version},</if>
 			<if test="deleted != null">#{deleted},</if>
+			<if test="logo != null">#{logo},</if>
 		</trim>
 	</insert>
 
@@ -52,11 +55,12 @@
 				<if test="id != null">ID = #{id},</if>
 				<if test="name != null">NAME = #{name},</if>
 				<if test="code != null">CODE = #{code},</if>
-				<if test="url != null">URL = #{url},</if>
+				<if test="siteUrl != null">SITE_URL = #{siteUrl},</if>
 				<if test="createTime != null">CREATE_TIME = #{createTime},</if>
 				<if test="lastUpdate != null">LAST_UPDATE = #{lastUpdate},</if>
 				<if test="version != null">VERSION = #{version},</if>
 				<if test="deleted != null">DELETED = #{deleted},</if>
+				<if test="logo != null">LOGO = #{logo},</if>
 			</trim>
 		</set>
 		WHERE ID = #{id}
@@ -70,11 +74,12 @@
 				<if test="id != null">ID = #{id},</if>
 				<if test="name != null">NAME = #{name},</if>
 				<if test="code != null">CODE = #{code},</if>
-				<if test="url != null">URL = #{url},</if>
+				<if test="siteUrl != null">SITE_URL = #{siteUrl},</if>
 				<if test="createTime != null">CREATE_TIME = #{createTime},</if>
 				<if test="lastUpdate != null">LAST_UPDATE = #{lastUpdate},</if>
 				<if test="version != null">VERSION = VERSION + 1,</if>
 				<if test="deleted != null">DELETED = #{deleted},</if>
+				<if test="logo != null">LOGO = #{logo},</if>
 			</trim>
 		</set>
 		WHERE ID = #{id} AND VERSION = #{version}
@@ -89,7 +94,7 @@
 				</foreach>
 			</if>
 			<if test="fields == null or fields.size() == 0">
-				ID, NAME, CODE, URL, CREATE_TIME, LAST_UPDATE, VERSION, DELETED 
+				ID, NAME, CODE, SITE_URL, CREATE_TIME, LAST_UPDATE, VERSION, DELETED, LOGO 
 			</if>
 		FROM brand
 	</sql>
@@ -100,8 +105,11 @@
 			<if test="params.id != null">AND ID = #{params.id}</if>
 			<if test="params.name != null and params.name != ''">AND NAME = #{params.name}</if>
 			<if test="params.code != null and params.code != ''">AND CODE = #{params.code}</if>
-			<if test="params.url != null and params.url != ''">AND URL = #{params.url}</if>
+			<if test="params.siteUrl != null and params.siteUrl != ''">AND SITE_URL = #{params.siteUrl}</if>
+			<if test="params.createTime != null">AND CREATE_TIME = #{params.createTime}</if>
+			<if test="params.lastUpdate != null">AND LAST_UPDATE = #{params.lastUpdate}</if>
 			<if test="params.deleted != null">AND DELETED = #{params.deleted}</if>
+			<if test="params.logo != null and params.logo != ''">AND LOGO = #{params.logo}</if>
 		</where>
 	</sql>
 
@@ -117,7 +125,7 @@
 
 	<!-- 主键查询 -->
 	<select id="get" parameterType="long" resultMap="brand">
-		SELECT ID, NAME, CODE, URL, CREATE_TIME, LAST_UPDATE, VERSION, DELETED FROM brand WHERE ID = #{id}
+		SELECT ID, NAME, CODE, SITE_URL, CREATE_TIME, LAST_UPDATE, VERSION, DELETED, LOGO FROM brand WHERE ID = #{id}
 	</select>
 
 	<!-- 列表查询 -->
