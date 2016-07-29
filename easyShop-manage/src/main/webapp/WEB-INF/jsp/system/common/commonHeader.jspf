@@ -20,6 +20,9 @@
 <link href="${ctx }/static/lib/hplus/css/animate.min.css" rel="stylesheet">
 <link href="${ctx }/static/lib/hplus/css/style.min.css?v=4.0.0" rel="stylesheet">
 
+<!-- plugin -->
+<link href="${ctx }/static/lib/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css?v=4.0.0" rel="stylesheet">
+
 <script type="text/javascript">
 	//引入的js文件中使用的上下文
 	var ctx = "${ctx}";

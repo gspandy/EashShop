@@ -26,7 +26,7 @@ public class ProductCodeGenerateTest {
 			.setBeanExtendsPackage("org.common.module.entity")
 			.setBeanPackage("com.easyshop.product.entity")
 			//.setIncludeTables("attr,attr_val,brand,category,category_attr,product,product_attr,product_image,sku")
-			.setIncludeTables("brand")
+			.setIncludeTables("category_attr")
 			.setExcludeFields("DELETED,VERSION")
 			.setSaveDir("d:/test")
 			.setGenerateService(true)

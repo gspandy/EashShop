@@ -54,7 +54,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping(value = "/list")
 	public void list(@RequestParam(defaultValue = "0") Long id, HttpServletResponse response) {
 		Query<Map<String, Object>> query = new Query<Map<String, Object>>();
-		Map<String, Object> map = new HashMap<String, Object>(4);
+		Map<String, Object> map = new HashMap<String, Object>(1);
 		map.put("pid", id);
 		query.setParams(map);
 		List<Category> categories = categoryService.list(query);

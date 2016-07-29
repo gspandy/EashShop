@@ -10,10 +10,14 @@ import java.util.Date;
 /**
  * <p>类目属性
  * @author auto generated
- * @since 2016-06-12 17:59:08
+ * @since 2016-07-28 17:13:31
  */
 public class CategoryAttr extends BaseEntity {
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 主键
+	 */
+	private Long id;
 	/**
 	 * 类目id
 	 */
@@ -62,6 +66,14 @@ public class CategoryAttr extends BaseEntity {
 	 * 更新时间
 	 */
 	private Date lastUpdate;
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Long getCategoryId() {
 		return this.categoryId;

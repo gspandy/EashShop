@@ -22,6 +22,7 @@ import com.easyshop.common.web.AjaxResult;
  */
 public class BaseController {
 	private static final String RESPONSE_TYPE_JSON = "application/json";
+	private static final String RESPONSE_TYPE_TEXT = "text/plain";
 	private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 	/**
 	 * json string响应
@@ -39,6 +40,27 @@ public class BaseController {
 	 */
 	protected void jsonResponse(HttpServletResponse response, Object obj) {
 		response.setContentType(RESPONSE_TYPE_JSON);
+		PrintWriter pw = null;
+		try {
+			pw = response.getWriter();
+			pw.write(JsonUtil.object2JsonString(obj));
+			pw.flush();
+		} catch (IOException e) {
+			LOGGER.error("", e);
+		} finally {
+			if (null != pw) {
+				pw.close();
+			}
+		}
+	}
+	
+	/**
+	 * 通过HttpServletResponse将结果转为json数据返回
+	 * @param response
+	 * @param obj
+	 */
+	protected void textResponse(HttpServletResponse response, Object obj) {
+		response.setContentType(RESPONSE_TYPE_TEXT);
 		PrintWriter pw = null;
 		try {
 			pw = response.getWriter();

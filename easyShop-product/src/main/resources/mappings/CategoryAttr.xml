@@ -3,6 +3,7 @@
 <mapper namespace="com.easyshop.product.mapper.CategoryAttrMapper">
 	<!-- 结果映射器 -->
 	<resultMap id="categoryAttr" type="CategoryAttr">
+		<result property="id" column="ID"/>
 		<result property="categoryId" column="CATEGORY_ID"/>
 		<result property="categoryName" column="CATEGORY_NAME"/>
 		<result property="attrId" column="ATTR_ID"/>
@@ -23,6 +24,7 @@
 	<insert id="save" parameterType="CategoryAttr" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO category_attr
 		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
 			<if test="categoryId != null">CATEGORY_ID,</if>
 			<if test="categoryName != null">CATEGORY_NAME,</if>
 			<if test="attrId != null">ATTR_ID,</if>
@@ -40,6 +42,7 @@
 		</trim>
 		VALUES
 		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
 			<if test="categoryId != null">#{categoryId},</if>
 			<if test="categoryName != null">#{categoryName},</if>
 			<if test="attrId != null">#{attrId},</if>
@@ -67,6 +70,7 @@
 		UPDATE category_attr
 		<set>
 			<trim suffixOverrides=",">
+				<if test="id != null">ID = #{id},</if>
 				<if test="categoryId != null">CATEGORY_ID = #{categoryId},</if>
 				<if test="categoryName != null">CATEGORY_NAME = #{categoryName},</if>
 				<if test="attrId != null">ATTR_ID = #{attrId},</if>
@@ -91,6 +95,7 @@
 		UPDATE category_attr
 		<set>
 			<trim suffixOverrides=",">
+				<if test="id != null">ID = #{id},</if>
 				<if test="categoryId != null">CATEGORY_ID = #{categoryId},</if>
 				<if test="categoryName != null">CATEGORY_NAME = #{categoryName},</if>
 				<if test="attrId != null">ATTR_ID = #{attrId},</if>
@@ -119,7 +124,7 @@
 				</foreach>
 			</if>
 			<if test="fields == null or fields.size() == 0">
-				CATEGORY_ID, CATEGORY_NAME, ATTR_ID, ATTR_NAME, REQUIRED, IS_SALE, IS_COLOR, FIELD1, FIELD2, FIELD3, CREATE_TIME, LAST_UPDATE, VERSION, DELETED 
+				ID, CATEGORY_ID, CATEGORY_NAME, ATTR_ID, ATTR_NAME, REQUIRED, IS_SALE, IS_COLOR, FIELD1, FIELD2, FIELD3, CREATE_TIME, LAST_UPDATE, VERSION, DELETED 
 			</if>
 		FROM category_attr
 	</sql>
@@ -127,6 +132,7 @@
 	<!-- where条件 -->
 	<sql id="CategoryAttrWhere">
 		<where>
+			<if test="params.id != null">AND ID = #{params.id}</if>
 			<if test="params.categoryId != null">AND CATEGORY_ID = #{params.categoryId}</if>
 			<if test="params.categoryName != null and params.categoryName != ''">AND CATEGORY_NAME = #{params.categoryName}</if>
 			<if test="params.attrId != null">AND ATTR_ID = #{params.attrId}</if>
@@ -155,7 +161,7 @@
 
 	<!-- 主键查询 -->
 	<select id="get" parameterType="long" resultMap="categoryAttr">
-		SELECT CATEGORY_ID, CATEGORY_NAME, ATTR_ID, ATTR_NAME, REQUIRED, IS_SALE, IS_COLOR, FIELD1, FIELD2, FIELD3, CREATE_TIME, LAST_UPDATE, VERSION, DELETED FROM category_attr WHERE ID = #{id}
+		SELECT ID, CATEGORY_ID, CATEGORY_NAME, ATTR_ID, ATTR_NAME, REQUIRED, IS_SALE, IS_COLOR, FIELD1, FIELD2, FIELD3, CREATE_TIME, LAST_UPDATE, VERSION, DELETED FROM category_attr WHERE ID = #{id}
 	</select>
 
 	<!-- 列表查询 -->

@@ -39,18 +39,28 @@
             <div class="col-sm-7">
             	<div class="ibox ">
                     <div class="ibox-title">
-                        <h5>目录属性</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
+                        <form action="" method="post" id="categoryAttrSearchForm">
+	                    	<div class="row">
+	                            <div class="col-sm-4">
+	                                <div class="input-group">
+	                                	<span class="input-group-btn"><button type="button" class="btn btn-default">属性名称</button></span>
+	                                    <input name="attrName" type="text" class="form-control" placeholder="属性名称">
+	                                </div>
+	                            </div>
+	                            <div class="col-sm-8">
+	                                <button id="queryCategoryAttr" class="btn btn-success" type="button"><i class="fa fa-eye"></i>&nbsp;查询</button>
+	                                <button id="addCategoryAttr" class="btn btn-primary" type="button"><i class="fa fa-check"></i>&nbsp;添加</button>
+	                                <button id="updCategoryAttr" class="btn btn-info" type="button"><i class="fa fa-paste"></i>&nbsp;修改</button>
+	                                <button id="delCategoryAttr" class="btn btn-warning" type="button"><i class="fa fa-warning"></i>&nbsp;删除</button>
+	                            </div>
+	                        </div>
+                        </form>
                     </div>
                     <div class="ibox-content">
-                        
+                        <div class="jqGrid_wrapper">
+                            <table id="categoryAttrList"></table>
+                            <div id="categoryAttrListPager"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,6 +70,7 @@
     <jsp:include page="edit.jsp"/>
     
     <script src="${ctx }/static/lib/hplus/js/plugins/ztree/jquery.ztree.all-3.5.min.js"></script>
+    <script src="${ctx }/static/lib/hplus/js/plugins/suggest/bootstrap-suggest.min.js"></script>
 	<script src="${ctx }/static/js/product/category/category.js"></script>
 </body>
 </html>

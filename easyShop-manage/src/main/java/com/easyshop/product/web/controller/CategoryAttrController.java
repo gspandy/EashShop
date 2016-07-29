@@ -22,95 +22,96 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.easyshop.common.web.PageView;
 import com.easyshop.common.web.controller.BaseController;
-import com.easyshop.product.entity.AttrVal;
-import com.easyshop.product.service.AttrValService;
+import com.easyshop.product.entity.CategoryAttr;
+import com.easyshop.product.service.CategoryAttrService;
 
 /**
- * <p> 属性值控制器
+ * <p> 目录属性控制器
  * @author yejunwu123@gmail.com
- * @since 2016年6月17日 下午1:17:39
+ * @since 2016年7月28日 下午4:37:43
  */
 @Controller
-@RequestMapping("system/attrval/")
-public class AttributeValueController extends BaseController {
+@RequestMapping("system/category/attr/")
+public class CategoryAttrController extends BaseController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(AttributeValueController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CategoryAttrController.class);
 	
 	@Resource
-	AttrValService attrValService;
+	CategoryAttrService categoryAttrService;
 	
 	/**
 	 * 列表数据
 	 * @return
 	 */
 	@RequestMapping(value = "/list")
-	public void list(Integer attrId, String value, HttpServletResponse response) {
+	public void list(Long categoryId, String attrName, HttpServletResponse response) {
 		Query<Map<String, Object>> query = new Query<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>(2);
-		map.put("attrId", attrId);
-		map.put("value", value);
+		map.put("categoryId", categoryId);
+		map.put("attrName", attrName);
 		query.setParams(map);
-		Page page = attrValService.find(query);
+		Page page = categoryAttrService.find(query);
 		super.jsonResponse(response, new PageView(page));
 	}
 	
 	/**
-	 * 添加属性值
-	 * @param attrVal
+	 * 添加主目录属性
+	 * @param categoryAttr
+	 * @param response
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public void add(AttrVal attrVal, HttpServletResponse response) {
+	public void add(CategoryAttr categoryAttr, HttpServletResponse response) {
 		try {
-			attrVal.setCreateTime(new Date());
-			attrVal.setLastUpdate(new Date());
-			attrValService.save(attrVal);
+			categoryAttr.setCreateTime(new Date());
+			categoryAttr.setLastUpdate(new Date());
+			categoryAttrService.save(categoryAttr);
 		} catch (Exception e) {
-			LOGGER.error("属性值'" + attrVal.getValue() + "'添加失败", e);
-			super.ajaxResponse(response, 1, "属性值添加失败");
+			LOGGER.error("目录'" + categoryAttr.getCategoryId() + "'属性添加失败", e);
+			super.ajaxResponse(response, 1, "目录属性添加失败");
 		}
 		super.ajaxResponse(response, 0);
 	}
 	
 	/**
-	 * 获取属性信息
+	 * 获取类目属性信息
 	 * @param id
 	 * @param model
 	 * @return json格式数据
 	 */
 	@RequestMapping(value = "get/{id}", method = RequestMethod.GET)
 	public void get(@PathVariable(value = "id") Long id, Model model, HttpServletResponse response) {
-		AttrVal attrVal = attrValService.get(id);
-		super.jsonResponse(response, attrVal);
+		CategoryAttr categoryAttr = categoryAttrService.get(id);
+		super.jsonResponse(response, categoryAttr);
 	}
 	
 	/**
-	 * 属性值修改
-	 * @param attrVal
+	 * 类目属性修改
+	 * @param brand
 	 * @param response
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public void update(AttrVal attrVal, HttpServletResponse response) {
+	public void update(CategoryAttr categoryAttr, HttpServletResponse response) {
 		try {
-			attrValService.update(attrVal);
+			categoryAttrService.update(categoryAttr);
 		} catch (Exception e) {
-			LOGGER.error("属性值'" + attrVal.getValue() + "'修改失败", e);
-			super.ajaxResponse(response, 1, "属性值修改失败");
+			LOGGER.error("目录'" + categoryAttr.getCategoryName() + "',属性'" + categoryAttr.getAttrName() + "'修改失败", e);
+			super.ajaxResponse(response, 1, "目录属性修改失败");
 		}
 		super.ajaxResponse(response, 0);
 	}
 	
 	/**
-	 * 删除属性
+	 * 删除主目录
 	 * @param id
 	 * @param response
 	 */
 	@RequestMapping(value = "delete/{id}")
 	public void delete(@PathVariable(value = "id") Long id, HttpServletResponse response) {
 		try {
-			attrValService.delete(id);
+			categoryAttrService.delete(id);
 		} catch (Exception e) {
-			LOGGER.error("属性值删除失败", e);
-			super.ajaxResponse(response, 1, "属性值删除失败");
+			LOGGER.error("目录属性删除失败", e);
+			super.ajaxResponse(response, 1, "目录属性删除失败");
 		}
 		super.ajaxResponse(response, 0);
 	}

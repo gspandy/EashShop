@@ -3,8 +3,10 @@
  */
 package com.easyshop.product.web.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.easyshop.common.util.CollectionUtils;
 import com.easyshop.common.web.PageView;
 import com.easyshop.common.web.controller.BaseController;
 import com.easyshop.product.entity.Attr;
@@ -123,5 +126,25 @@ public class AttributeController extends BaseController {
 			super.ajaxResponse(response, 1, "属性删除失败");
 		}
 		super.ajaxResponse(response, 0);
+	}
+	
+	/**
+	 * 自动提示
+	 * @param name
+	 */
+	@RequestMapping(value = "suggest")
+	public void suggest(String q, HttpServletResponse response) {
+		Query<Map<String, Object>> query = new Query<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>(1);
+		map.put("name", q);
+		query.setParams(map);
+		List<Attr> attrs = attrService.list(query);
+		List<String[]> results = new ArrayList<String[]>();
+		if (CollectionUtils.isNotEmpty(attrs)) {
+			for (Attr attr : attrs) {
+				results.add(new String[]{attr.getId().toString(), attr.getName(), attr.getCode()});
+			}
+		}
+		super.textResponse(response, results);
 	}
 }
